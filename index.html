@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Editkaro.in — Portfolio</title>
+  <meta name="description" content="Editkaro.in — Social media marketing & video editing portfolio." />
+
+  <style>
+    /* ---------------------------
+       Base + Reset
+       --------------------------- */
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#ff6b6b;
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+      --text: #e6eef8;
+      --glass-2: rgba(255,255,255,0.02);
+      --transition: 250ms cubic-bezier(.2,.9,.3,1);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, #071024 0%, var(--bg) 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      padding:24px;
+    }
+    a{color:inherit;text-decoration:none}
+    img,video{max-width:100%;display:block}
+
+    /* ---------------------------
+       Page layout
+       --------------------------- */
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    /* ---------------------------
+       Header / Navbar
+       --------------------------- */
+    header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:22px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#ff9f43);
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      color:white;
+      box-shadow:0 6px 18px rgba(255,107,107,0.12);
+      flex-shrink:0;
+    }
+    .brand-title{font-size:1.125rem;font-weight:700;}
+    .navbar{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .nav-link{
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:10px;
+      font-weight:600;
+      transition:all var(--transition);
+    }
+    .nav-link:hover{color:var(--text);transform:translateY(-2px)}
+
+    /* ---------------------------
+       Hero
+       --------------------------- */
+    .hero{
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:28px;
+      display:flex;
+      gap:22px;
+      align-items:center;
+      margin-bottom:20px;
+      box-shadow: 0 6px 24px rgba(2,6,23,0.6);
+    }
+    .hero-left{flex:1}
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(255,107,107,0.12), rgba(255,159,67,0.06));
+      color:var(--accent);
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    .hero h1{margin:0;font-size:1.9rem;line-height:1.05}
+    .hero p{color:var(--muted);margin-top:8px}
+    .hero-cta{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+    }
+    .btn{
+      padding:10px 14px;
+      border-radius:12px;
+      background:var(--accent);
+      color:white;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      box-shadow:0 8px 28px rgba(255,107,107,0.12);
+      transition: transform 220ms ease;
+    }
+    .btn.secondary{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--text);
+      font-weight:600;
+    }
+    .btn:active{transform:translateY(1px)}
+
+    .hero-right{
+      width:280px;
+      flex-shrink:0;
+      position:relative;
+    }
+    .hero-preview{
+      border-radius:14px;
+      overflow:hidden;
+      background:var(--glass);
+      padding:6px;
+      border:1px solid var(--glass-2);
+    }
+    .hero-preview video{display:block;width:100%;height:auto;object-fit:cover}
+
+    /* ---------------------------
+       Filters
+       --------------------------- */
+    .filters{
+      margin:18px 0;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .filter-btn{
+      padding:8px 12px;
+      border-radius:999px;
+      background:transparent;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.03);
+      cursor:pointer;
+      font-weight:700;
+      transition: all var(--transition);
+    }
+    .filter-btn.active{
+      background: linear-gradient(90deg, rgba(255,107,107,0.14), rgba(255,159,67,0.08));
+      color:var(--accent);
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(2,6,23,0.5);
+    }
+
+    /* ---------------------------
+       Grid of videos
+       --------------------------- */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+      border-radius:14px;
+      overflow:hidden;
+      position:relative;
+      transition: transform var(--transition), box-shadow var(--transition);
+      border:1px solid rgba(255,255,255,0.02);
+      cursor:pointer;
+    }
+    .card:focus-within, .card:hover{
+      transform:translateY(-8px);
+      box-shadow: 0 18px 40px rgba(2,6,23,0.6);
+    }
+    .thumb{
+      position:relative;
+      aspect-ratio:16/9;
+      overflow:hidden;
+      background:#000;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb .play-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+      transition:opacity 180ms;
+    }
+    .thumb .play-overlay .bubble{
+      width:66px;height:66px;border-radius:50%;
+      background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+      display:grid;place-items:center;
+      border:2px solid rgba(255,255,255,0.06);
+    }
+    .thumb .play-overlay svg{width:28px;height:28px;opacity:0.95}
+    .meta{
+      padding:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .meta .title{font-weight:700}
+    .meta .cat{font-size:0.85rem;color:var(--muted);font-weight:700}
+
+    /* subtle hover: preview video */
+    .card:hover .thumb img{transform:scale(1.04); transition:transform 600ms cubic-bezier(.2,.9,.3,1)}
+    .thumb img{transition:transform 600ms}
+
+    /* ---------------------------
+       Lightbox modal
+       --------------------------- */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      place-items:center;
+      z-index:9999;
+      backdrop-filter: blur(6px) saturate(1.1);
+      background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.8));
+      padding:28px;
+    }
+    .modal.show{display:grid}
+    .modal-card{
+      width:min(1100px,95%);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.4));
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 28px 80px rgba(2,6,23,0.7);
+    }
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 16px;
+      border-bottom:1px solid rgba(255,255,255,0.02);
+    }
+    .modal-body{
+      background: #000;
+      display:grid;
+      grid-template-columns: 1fr 300px;
+      gap:0;
+    }
+    .modal-body video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+    .side-info{
+      padding:14px;
+      color:var(--muted);
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    }
+    .close-btn{
+      background:transparent;border:none;color:var(--muted);font-weight:800;font-size:1.1rem;cursor:pointer;padding:8px;border-radius:8px;
+    }
+    .close-btn:hover{color:var(--text)}
+
+    /* ---------------------------
+       Responsive
+       --------------------------- */
+    @media (max-width:980px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .modal-body{grid-template-columns:1fr 260px}
+      .hero-right{display:none}
+    }
+    @media (max-width:640px){
+      body{padding:14px}
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+      .grid{grid-template-columns:1fr}
+      .hero{flex-direction:column;align-items:flex-start}
+      .hero h1{font-size:1.4rem}
+      .modal-body{grid-template-columns:1fr}
+      .side-info{display:none}
+      .meta{flex-direction:column;align-items:flex-start;gap:6px}
+    }
+
+    /* small helper */
+    .muted{color:var(--muted)}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, monospace;background:#091221;padding:6px 8px;border-radius:8px;color:var(--muted);font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand" aria-label="Editkaro brand">
+        <div class="logo" aria-hidden="true">EK</div>
+        <div>
+          <div class="brand-title">Editkaro.in</div>
+          <div class="muted" style="font-size:0.9rem">Social Media Marketing & Video Editing</div>
+        </div>
+      </div>
+
+      <nav class="navbar" aria-label="Top navigation">
+        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#portfolio">Portfolio</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+        <div class="tag">Featured Agency</div>
+        <h1 id="hero-heading">We edit your vision into viral videos</h1>
+        <p>Short-form videos, long-form narratives, gaming montages, football edits, color grading, eCommerce ads and more — handcrafted to perform on social platforms.</p>
+
+        <div class="hero-cta">
+          <button class="btn" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">See Portfolio</button>
+          <a href="#contact" class="btn secondary">Book a Call</a>
+        </div>
+      </div>
+
+      <div class="hero-right" aria-hidden="true">
+        <div class="hero-preview" title="Recent edit preview">
+          <!-- small autoplay muted loop preview -->
+          <video muted autoplay loop playsinline poster="https://picsum.photos/seed/edit/800/450">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+            <!-- fallback image -->
+            <img src="https://picsum.photos/seed/edit/800/450" alt="">
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <div id="portfolio" class="container" style="padding:0">
+      <div style="display:flex;align-items:center;justify-content:space-between; gap:12px;">
+        <h2 style="margin:8px 0 0 0">Our Work</h2>
+        <div class="muted">Tip: Click a card to open the video. Press <span class="kbd">Esc</span> to close.</div>
+      </div>
+
+      <div class="filters" role="tablist" aria-label="Portfolio categories" id="filters">
+        <!-- buttons filled via JS initialization to keep markup tidy -->
+      </div>
+
+      <!-- Grid -->
+      <div class="grid" id="grid" aria-live="polite" aria-busy="false">
+        <!-- cards injected by JS -->
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" style="margin-top:28px">
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1;min-width:240px">
+          <h3>About Editkaro</h3>
+          <p class="muted">Editkaro.in is a boutique social video studio focusing on high-engagement short-form content, visually rich ads and narrative edits for creators and brands. We combine creative editing, sound design and color grading to make your content pop across platforms.</p>
+        </div>
+        <div style="min-width:220px">
+          <strong>Services</strong>
+          <ul class="muted" style="margin:8px 0 0 18px">
+            <li>Short & long-form video editing</li>
+            <li>Social ads & eCommerce videos</li>
+            <li>Color grading & LUT creation</li>
+            <li>Gaming montages & highlight reels</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="margin-top:28px;margin-bottom:56px">
+      <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+        <div style="flex:1;min-width:240px">
+          <h3>Work with us</h3>
+          <p class="muted">Send a short brief and we'll send a quote. Or simply book a quick call.</p>
+        </div>
+
+        <form style="display:flex;gap:8px;flex-wrap:wrap;align-items:center" onsubmit="event.preventDefault();alert('Thanks — this demo form does not send. Replace this with your backend or form service.')">
+          <input required placeholder="Your name" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)" />
+          <input required placeholder="Email" type="email" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)" />
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <footer style="text-align:center;color:var(--muted);padding:18px 0">
+      © <span id="year"></span> Editkaro.in • Made with ❤
+    </footer>
+  </div>
+
+  <!-- Modal (lightbox) -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card" role="document">
+      <div class="modal-header">
+        <div>
+          <div id="modal-title" style="font-weight:800"></div>
+          <div id="modal-cat" class="muted" style="font-size:0.9rem"></div>
+        </div>
+        <div>
+          <button class="close-btn" id="modal-close" title="Close (Esc)">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div style="min-height:220px;background:#000;display:flex;align-items:center;justify-content:center;">
+          <video controls id="modal-video" playsinline>
+            <!-- sources injected by JS -->
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <aside class="side-info">
+          <h4 style="margin:6px 0 10px 0">Project Info</h4>
+          <p id="modal-desc" class="muted">Short description will appear here.</p>
+          <div style="margin-top:12px">
+            <strong>Category</strong>
+            <div id="modal-cat2" class="muted" style="margin-top:6px"></div>
+          </div>
+          <div style="margin-top:18px">
+            <strong>Delivered</strong>
+            <div class="muted">Social ads / Reels / YouTube shorts</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ===========================
+       Portfolio data (expand as needed)
+       =========================== */
+    const portfolioItems = [
+      {
+        id: 'v1',
+        title: 'Short-form: Fashion Promo',
+        category: 'Short-form',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/fashion/800/450',
+        desc: 'Fast-paced short-form edit for a fashion brand showcasing product transitions and color grading.'
+      },
+      {
+        id: 'v2',
+        title: 'Gaming Montage — Pro Plays',
+        category: 'Gaming',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/gaming/800/450',
+        desc: 'High-energy gaming montage with synced beats and motion graphics overlays.'
+      },
+      {
+        id: 'v3',
+        title: 'Football Highlights',
+        category: 'Football',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/football/800/450',
+        desc: 'Match highlight reel with slow-motion moments and dramatic grading.'
+      },
+      {
+        id: 'v4',
+        title: 'eCommerce Ad — Product Demo',
+        category: 'eCommerce',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/ecom/800/450',
+        desc: '60-second ad optimized for Instagram & Facebook featuring product close-ups.'
+      },
+      {
+        id: 'v5',
+        title: 'Documentary Teaser',
+        category: 'Documentary',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/docu/800/450',
+        desc: 'Cinematic short teaser showing narrative pacing and color fidelity.'
+      },
+      {
+        id: 'v6',
+        title: 'Color Grading Reel',
+        category: 'Color Grading',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/color/800/450',
+        desc: 'Before/after grading samples demonstrating our LUT styles and color correction.'
+      },
+      {
+        id: 'v7',
+        title: 'Anime-style Promo',
+        category: 'Anime',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/anime/800/450',
+        desc: 'Stylized edit with motion-graphic text and animated frames for anime content.'
+      },
+      {
+        id: 'v8',
+        title: 'Long-form: Short Documentary (Excerpt)',
+        category: 'Long-form',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/long/800/450',
+        desc: 'Excerpt from a longer documentary edit demonstrating storytelling and sound design.'
+      },
+      {
+        id: 'v9',
+        title: 'Ad: Brand Campaign',
+        category: 'Ads',
+        src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+        poster: 'https://picsum.photos/seed/ads/800/450',
+        desc: '30-second ad tailored for multi-platform distribution.'
+      }
+    ];
+
+    /* ===========================
+       Categories (auto derived)
+       =========================== */
+    const categories = ['All', ...Array.from(new Set(portfolioItems.map(i=>i.category)))];
+
+    /* ===========================
+       DOM refs
+       =========================== */
+    const filtersEl = document.getElementById('filters');
+    const gridEl = document.getElementById('grid');
+    const modal = document.getElementById('modal');
+    const modalVideo = document.getElementById('modal-video');
+    const modalClose = document.getElementById('modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCat = document.getElementById('modal-cat');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalCat2 = document.getElementById('modal-cat2');
+
+    /* ===========================
+       Initialize header year
+       =========================== */
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    /* ===========================
+       Render filter buttons
+       =========================== */
+    let activeCategory = 'All';
+    function renderFilters(){
+      filtersEl.innerHTML = '';
+      categories.forEach(cat=>{
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (cat===activeCategory ? ' active' : '');
+        btn.textContent = cat;
+        btn.setAttribute('role','tab');
+        btn.setAttribute('aria-selected', cat===activeCategory ? 'true' : 'false');
+        btn.addEventListener('click', ()=> {
+          activeCategory = cat;
+          updateActiveFilter();
+          renderGrid();
+        });
+        filtersEl.appendChild(btn);
+      });
+    }
+    function updateActiveFilter(){
+      Array.from(filtersEl.children).forEach(b=>{
+        b.classList.toggle('active', b.textContent===activeCategory);
+        b.setAttribute('aria-selected', b.classList.contains('active') ? 'true' : 'false');
+      });
+    }
+
+    /* ===========================
+       Render grid
+       =========================== */
+    function renderGrid(){
+      gridEl.setAttribute('aria-busy','true');
+      gridEl.innerHTML = '';
+
+      const items = activeCategory === 'All' ? portfolioItems : portfolioItems.filter(i=>i.category===activeCategory);
+
+      if(items.length === 0){
+        const msg = document.createElement('div');
+        msg.className = 'muted';
+        msg.textContent = 'No items in this category yet.';
+        gridEl.appendChild(msg);
+        gridEl.setAttribute('aria-busy','false');
+        return;
+      }
+
+      items.forEach(item =>{
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.tabIndex = 0;
+        card.setAttribute('data-id', item.id);
+        card.setAttribute('role','button');
+        card.setAttribute('aria-label', item.title + ' – ' + item.category);
+        card.innerHTML = `
+          <div class="thumb" aria-hidden="true">
+            <img loading="lazy" src="${item.poster}" alt="${item.title} thumbnail" />
+            <div class="play-overlay" aria-hidden="true">
+              <div class="bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 3v18l15-9L5 3z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="meta">
+            <div>
+              <div class="title">${item.title}</div>
+              <div class="muted" style="font-size:0.85rem;margin-top:6px">${item.desc}</div>
+            </div>
+            <div class="cat">${item.category}</div>
+          </div>
+        `;
+
+        // open modal on click or Enter
+        card.addEventListener('click', ()=> openModal(item));
+        card.addEventListener('keydown', (e)=>{
+          if(e.key==='Enter' || e.key===' '){ e.preventDefault(); openModal(item); }
+        });
+
+        gridEl.appendChild(card);
+      });
+
+      gridEl.setAttribute('aria-busy','false');
+    }
+
+    /* ===========================
+       Modal controls
+       =========================== */
+    function openModal(item){
+      modalTitle.textContent = item.title;
+      modalCat.textContent = item.category;
+      modalDesc.textContent = item.desc;
+      modalCat2.textContent = item.category;
+
+      // Set video source: clear old children, add new source, load & play
+      while (modalVideo.firstChild) modalVideo.removeChild(modalVideo.firstChild);
+      const src = document.createElement('source');
+      src.src = item.src;
+      src.type = 'video/mp4';
+      modalVideo.appendChild(src);
+      modalVideo.poster = item.poster;
+      modalVideo.load();
+
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+
+      // play after slight delay to ensure ready (autoplay policies vary)
+      setTimeout(()=> {
+        modalVideo.play().catch(()=> {
+          // if autoplay blocked, keep controls visible
+          modalVideo.controls = true;
+        });
+      }, 150);
+
+      // trap focus (simple)
+      modalClose.focus();
+    }
+
+    function closeModal(){
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+      // pause and reset
+      modalVideo.pause();
+      modalVideo.currentTime = 0;
+      // return focus to first active filtered card
+      const focusCard = document.querySelector('.card');
+      if(focusCard) focusCard.focus();
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    // close when clicking backdrop
+    modal.addEventListener('click', (e)=> {
+      if(e.target === modal) closeModal();
+    });
+
+    // keyboard escape
+    document.addEventListener('keydown', (e)=> {
+      if(e.key === 'Escape' && modal.classList.contains('show')) {
+        closeModal();
+      }
+    });
+
+    /* ===========================
+       Initialization
+       =========================== */
+    function init(){
+      renderFilters();
+      renderGrid();
+    }
+
+    init();
+
+    /* ===========================
+       Accessibility improvements:
+       allow left/right filter navigation with arrow keys
+       =========================== */
+    filtersEl.addEventListener('keydown', (e)=>{
+      const focusable = Array.from(filtersEl.querySelectorAll('button'));
+      const idx = focusable.indexOf(document.activeElement);
+      if(idx === -1) return;
+
+      if(e.key === 'ArrowRight') {
+        const next = focusable[(idx + 1) % focusable.length];
+        next.focus();
+        next.click();
+      } else if(e.key === 'ArrowLeft') {
+        const prev = focusable[(idx - 1 + focusable.length) % focusable.length];
+        prev.focus();
+        prev.click();
+      }
+    });
+
+    /* ===========================
+       Notes for deployment / customization:
+       - Replace portfolioItems[].src with your hosted mp4 links (S3, Cloudinary, or raw GitHub if small).
+       - Replace poster images with your thumbnails for fast UX.
+       - Connect the contact form action to your mailer / API.
+       =========================== */
+  </script>
+</body>
+</html>
